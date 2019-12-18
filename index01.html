@@ -39,7 +39,7 @@ img {
 	<body>
 
 		<div id="app">
-			<p v-html="message"></p>
+			<p v-html="hat(Crystal(wizard))"></p>
 		</div>
 
 		<script>
@@ -52,10 +52,24 @@ function emojify(name) {
 	return out
 }
 
+//cast a spell with cast function around the wizard
+function cast(emoji){
+	if(!emoji){
+		emoji = "~\_(/...\)_/~"
+	}
+	return function(wizard){
+		return emoji + wizard + emoji
+	}
+}
+
 var app = new Vue({
 	el: "#app",
   data: {
-    message: "This text is telling you to "+ emojify("party")
+    wizard: emojify("wizard")
+  },
+  method: {
+	  Crystal: cast(emojify("Crystal")),
+	  hat: cast(emojify("hat"))
   }
 })
 
